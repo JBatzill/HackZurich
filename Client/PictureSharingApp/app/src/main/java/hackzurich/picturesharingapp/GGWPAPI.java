@@ -96,8 +96,6 @@ class GGWPAPI {
         os.close();
         
         InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-        readStream(in);
-        
         String theString = IOUtils.toString(in, "UTF-8"); 
         return theString;
         
