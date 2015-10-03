@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PictureShareApp</string>
+    <string name="login_header">Log In</string>
+    <string name="login_hint_email">E-Mail</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_hint_firstname">First Name</string>
+    <string name="login_hint_lastname">Last Name</string>
+    <string name="btn_login">Login</string>
+    <string name="title_activity_login">Login</string>
+    <string name="login_create_account">Create Account</string>
+
+    <string name="title_activity_register">Register</string>
+
+</resources>
