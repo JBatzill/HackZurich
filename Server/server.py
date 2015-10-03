@@ -1,22 +1,28 @@
 import sys, hashlib, json, os, random
+
+from azure.storage.blob import BlobService
+
 from flask import Flask, request, redirect, url_for, send_file
 from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = './tmp/uploads/'
 
-# change this for azure sql storage
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./tmp/test.db'
+# azure sql (using FreeTDS)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://azuresqluser:Awesome42@sqlserverdatasource'
 db = SQLAlchemy(app)
 
-# change these for azure cloud storage
-app.config['UPLOAD_FOLDER'] = './tmp/uploads/'
+# azure cloud storage
+blob_service = BlobService(account_name='ggwpstorage', account_key='pwXjIuTp4q/Ar3mq2nvcww0/jmeNJtgzaxpu1EXqoBbchIC+EOyxCML79UXMdbO9Pc2L6IfCqLUiA/Jhs1MfJA==')
 def save_file(file, filename):
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    return os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    blob_service.put_block_blob_from_file('photos',filename,file,x_ms_blob_content_type='image/jpeg')
+    return filename
+def get_file(filename):
+    path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    blob_service.get_blob_to_path('photos', filename, path)
+    return send_file(path, mimetype='image/jpeg')
 
-def get_file(path):
-    return url_for(path)
-    
+# relational model
 memberships = db.Table('memberships',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('group_id', db.Integer, db.ForeignKey('group.id'))
@@ -85,13 +91,8 @@ class Session(db.Model):
         self.user_id = user_id
         self.session_key = hashlib.md5("{0}".format(random.randint(0, 100000000))).hexdigest()
 
-@app.route("/api", methods = ['POST'])
+@app.route("/api", methods = ['GET'])
 def api():
-    firstname = request.form['firstname']
-    lastname = request.form['lastname']
-    email = request.form['email']
-    password = request.form['password']
-    
     return "Hello"
 
 @app.route("/api/register", methods = ['POST'])
@@ -259,12 +260,15 @@ def photo_get(session_key, photo_id):
     photo = Photo.query.filter_by(id = photo_id).first()
     
     if photo is not None:
-        return send_file(photo.path, mimetype='image/jpeg')
+        return get_file(photo.path)
     else:
         return "Error: Photo not found."
 
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == 'create_db':
         db.create_all()
+    elif len(sys.argv) > 1 and sys.argv[1] == 'create_storage':
+        blob_service.create_container('photos')
+        
     else:
-        app.run(debug=True)
+        app.run(host = '0.0.0.0', port=5000, debug = True)
