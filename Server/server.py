@@ -91,7 +91,7 @@ class Session(db.Model):
         self.user_id = user_id
         self.session_key = hashlib.md5("{0}".format(random.randint(0, 100000000))).hexdigest()
 
-@app.route("/api", methods = ['GET'])
+@app.route("/api/", methods = ['POST'])
 def api():
     return "Hello"
 
@@ -101,7 +101,9 @@ def register():
     lastname = request.form['lastname']
     email = request.form['email']
     password = request.form['password']
-
+    
+    print "YO"
+    
     if User.query.filter_by(email = email).first() is not None:
         return "Error: User name already in use."
     else:
@@ -116,6 +118,8 @@ def register():
 def login():
     email = request.form['email']
     password = request.form['password']
+    
+    print email, password
     
     if User.query.filter_by(email = email).first() is None:
         return "Error: User not found"
