@@ -34,8 +34,10 @@ public class RegisterActivity extends Activity {
     }
 
     private void registerUser(String firstname, String lastname, String email, String password) {
-
-
+        GGWPAPI ggwp = GGWPAPI.getInstance();
+        if (ggwp.register(firstname, lastname, email, password) != 0) {
+            successfullRegistered(email, password);
+        };
     }
 
     private void successfullRegistered(String email, String password) {
