@@ -1,4 +1,4 @@
-package hackzurich.picturesharingapp;
+package hackzurich.picturesharingapp.network;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,11 +26,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-class GGWPAPI {
+public class GGWPAPI {
 
-    static GGWPAPI instance;
+    private static GGWPAPI instance;
 
-    static GGWPAPI getInstance() {
+    public static GGWPAPI getInstance() {
         if (GGWPAPI.instance == null) {
             GGWPAPI.instance = new GGWPAPI();
         }

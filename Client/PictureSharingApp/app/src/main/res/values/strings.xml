@@ -10,7 +10,9 @@
     <string name="btn_login">Login</string>
     <string name="title_activity_login">Login</string>
     <string name="login_create_account">Create Account</string>
-
     <string name="title_activity_register">Register</string>
+    <string name="title_activity_sharings">Sharings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

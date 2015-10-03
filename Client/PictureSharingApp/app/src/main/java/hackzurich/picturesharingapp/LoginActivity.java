@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import hackzurich.picturesharingapp.network.GGWPAPI;
 
 
 public class LoginActivity extends Activity {
