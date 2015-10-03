@@ -130,7 +130,7 @@ def login():
     return "Error"
 
 @app.route("/api/<session_key>/group", methods = ['POST'])
-def group(session_key):
+def add_group(session_key):
     session = Session.query.filter_by(session_key = session_key).first()
     if session is not None:
         user = User.query.filter_by(id = session.user_id).first()
@@ -142,6 +142,17 @@ def group(session_key):
     db.session.commit()
     
     return "{0}".format(group.id)
+    
+@app.route("/api/<session_key>/group", methods = ['GET'])
+def get_groups(session_key):
+    session = Session.query.filter_by(session_key = session_key).first()
+    if session is not None:
+        user = User.query.filter_by(id = session.user_id).first()
+    else:
+        return "Error: Not Logged In."
+    
+    groups_serialized = json.dumps([group.id for group in user.groups])[1:-1]
+    return groups_serialized
 
 @app.route("/api/<session_key>/group/<int:id>/members", methods = ['POST'])
 def group_members_add(session_key, id):
@@ -179,7 +190,7 @@ def group_members_get(session_key, id):
     group = Group.query.filter_by(id = id).first()
     if group is not None:
         if user.id == group.creator_id or user in group.Members:
-            members_serialized = json.dumps([member.email for member in group.members])
+            members_serialized = json.dumps([member.email for member in group.members])[1:-1]
             return members_serialized
         else:
             return "Error: Access to group not granted."
@@ -224,7 +235,7 @@ def group_shares_get(session_key, id):
     group = Group.query.filter_by(id = id).first()
     if group is not None:
         if user.id == group.creator_id or user in group.Members:
-            photos_serialized = json.dumps([share.photo_id for share in group.shares])
+            photos_serialized = json.dumps([share.photo_id for share in group.shares])[1:-1]
             return photos_serialized
         else:
             return "Error: Access to group not granted."
