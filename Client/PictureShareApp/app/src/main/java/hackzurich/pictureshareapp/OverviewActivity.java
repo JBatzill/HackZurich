@@ -8,6 +8,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,14 +52,17 @@ public class OverviewActivity extends Activity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, OverviewFragment.newInstance(position + 1))
-                .commit();
+
+        if(position == 0) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new OverviewFragment())
+                    .commit();
+        }
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
-            case 1:
+            case 0:
                 mTitle = getString(R.string.title_section1);
                 break;
         }
