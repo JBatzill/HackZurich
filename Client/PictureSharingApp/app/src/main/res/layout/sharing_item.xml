@@ -4,8 +4,15 @@
     android:layout_height="match_parent" android:background="@android:color/white">
 
     <TextView
+        android:id="@+id/txt_title"
         android:layout_width="fill_parent"
         android:layout_height="48pt"
         android:textColor="@color/textColorSecundary"/>
 
+    <ImageView
+        android:id="@+id/img_preview"
+        android:scaleType="centerCrop"
+        android:layout_width="fill_parent"
+        android:layout_height="100pt" />
+    
 </hackzurich.picturesharingapp.helper.RoundedCornerLayout>

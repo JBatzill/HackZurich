@@ -33,7 +33,7 @@ public class LoginActivity extends Activity {
             @Override
             protected void onPostExecute(Boolean successful) {
                 if(successful) {
-                    Intent intent = new Intent(context, RegisterActivity.class);
+                    Intent intent = new Intent(context, SharingsActivity.class);
                     context.startActivity(intent);
                 }
             }

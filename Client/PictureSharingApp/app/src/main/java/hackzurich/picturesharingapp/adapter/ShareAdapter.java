@@ -48,15 +48,15 @@ public class ShareAdapter extends BaseAdapter {
         if (v == null) {
             LayoutInflater vi;
             vi = LayoutInflater.from(this.context);
-            //v = vi.inflate(R.layout.share_item, null);
+            v = vi.inflate(R.layout.sharing_item, null);
         }
 
         SharingItemContainer p = getItem(position);
         if (p != null) {
-            //TextView txt_title = (TextView)v.findViewById(R.id.txt_title);
-            //ImageView img_preview = (ImageView)v.findViewById(R.id.img_preview);
-            //txt_title.setText(((SharingItemContainer)p).getTitle());
-            //img_preview.setImageBitmap(((SharingItemContainer)p).getImage());
+            TextView txt_title = (TextView)v.findViewById(R.id.txt_title);
+            ImageView img_preview = (ImageView)v.findViewById(R.id.img_preview);
+            txt_title.setText(((SharingItemContainer)p).getTitle());
+            img_preview.setImageBitmap(((SharingItemContainer)p).getImage());
         }
         return v;
     }

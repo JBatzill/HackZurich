@@ -17,12 +17,21 @@ import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +68,7 @@ public class GGWPAPI {
         this.httpClient = new DefaultHttpClient();
     }
     
-    private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException {
+    private String getQuery(List<NameValuePair> params) {
         StringBuilder result = new StringBuilder();
         boolean first = true;
 
@@ -71,32 +80,82 @@ public class GGWPAPI {
                 result.append("&");
             }
 
-            result.append(URLEncoder.encode(pair.getName(), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
+            try {
+                result.append(URLEncoder.encode(pair.getName(), "UTF-8"));
+                result.append("=");
+                result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
 
         return result.toString();
     }
+
     
-    private String post(String path, List<NameValuePair> nameValuePair) {
-        URL url = new URL(this.url + path);
-        HttpURLConnection http = (HttpURLConnection) url.openConnection();
-        http.setRequestMethod("POST");
+    private String post(String path, List<NameValuePair> nameValuePair)  {
+
+        URL url = null;
+        try {
+            url = new URL(this.url + path);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        HttpURLConnection http = null;
+        try {
+            http = (HttpURLConnection) url.openConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (http != null) {
+            try {
+                http.setRequestMethod("POST");
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            }
+        }
         http.setDoInput(true);
         http.setDoOutput(true);
         
-        # write data
-        OutputStream os = http.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(
-        new OutputStreamWriter(os, "UTF-8"));
-        writer.write(getQuery(nameValuePair));
-        writer.flush();
-        writer.close();
-        os.close();
-        
-        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-        String theString = IOUtils.toString(in, "UTF-8"); 
+        //write data
+        OutputStream os = null;
+        try {
+            os = http.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(
+            new OutputStreamWriter(os, "UTF-8"));
+
+            writer.write(getQuery(nameValuePair));
+            writer.flush();
+            writer.close();
+            os.close();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        InputStream in = null;
+        try {
+            in = new BufferedInputStream(http.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
+        String theString = s.hasNext() ? s.next() : "";
+
+        if (in != null) {
+            try {
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return theString;
         
         /*
