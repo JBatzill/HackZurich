@@ -7,5 +7,6 @@
     <color name="primaryBackgroundColor">#FF3333</color>
 
     <color name="hintColor">#CCCCCC</color>
+    <color name="transBlackBackground">#55000000</color>
 
 </resources>
