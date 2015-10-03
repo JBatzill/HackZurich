@@ -2,11 +2,14 @@ package hackzurich.picturesharingapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class RegisterActivity extends Activity {
@@ -33,11 +36,28 @@ public class RegisterActivity extends Activity {
         this.registerUser(firstname, lastname, email, password);
     }
 
-    private void registerUser(String firstname, String lastname, String email, String password) {
-        GGWPAPI ggwp = GGWPAPI.getInstance();
-        if (ggwp.register(firstname, lastname, email, password) != 0) {
-            successfullRegistered(email, password);
-        };
+    private void registerUser(final String firstname, final String lastname, final String email, final String password) {
+
+        new AsyncTask<Object, Object, Boolean>() {
+
+            @Override
+            protected Boolean doInBackground(Object... params) {
+                try {
+                    GGWPAPI ggwp = GGWPAPI.getInstance();
+                    ggwp.register(firstname, lastname, email, password);
+                    return true;
+                } catch (Exception ex) {
+                    Log.d("GGWPAPI", ex.getMessage());
+                }
+
+                return false;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean successful) {
+                if(successful) LoginActivity.LOG_IN(getBaseContext(), email, password);
+            }
+        }.execute();
     }
 
     private void successfullRegistered(String email, String password) {

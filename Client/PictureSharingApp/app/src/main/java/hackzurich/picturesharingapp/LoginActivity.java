@@ -3,7 +3,9 @@ package hackzurich.picturesharingapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,8 +14,30 @@ import android.widget.EditText;
 
 public class LoginActivity extends Activity {
 
-    public static void LOG_IN(Context context, String email, String password) {
+    public static void LOG_IN(final Context context, final String email, final String password) {
+        new AsyncTask<Object, Object, Boolean>() {
 
+            @Override
+            protected Boolean doInBackground(Object... params) {
+                try {
+                    GGWPAPI ggwp = GGWPAPI.getInstance();
+                    ggwp.login(email, password);
+                    return true;
+                } catch (Exception ex) {
+                    Log.d("GGWPAPI", ex.getMessage());
+                }
+
+                return false;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean successful) {
+                if(successful) {
+                    Intent intent = new Intent(context, RegisterActivity.class);
+                    context.startActivity(intent);
+                }
+            }
+        }.execute();
     }
 
     @Override

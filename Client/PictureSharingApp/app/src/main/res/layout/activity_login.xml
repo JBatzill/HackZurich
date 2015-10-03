@@ -56,7 +56,7 @@
                     android:layout_height="32dp"
                     android:text="@string/btn_login"
                     android:background="@drawable/round_primary_button"
-                    android:onClick="txtRegister_OnClick"
+                    android:onClick="btnRegistr_OnClick"
                     />
 
                 <TextView
