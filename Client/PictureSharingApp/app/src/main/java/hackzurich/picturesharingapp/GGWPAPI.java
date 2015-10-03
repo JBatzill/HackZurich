@@ -59,7 +59,49 @@ class GGWPAPI {
         this.httpClient = new DefaultHttpClient();
     }
     
+    private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        for (NameValuePair pair : params) {
+            if (first) {
+                first = false;
+            }
+            else {
+                result.append("&");
+            }
+
+            result.append(URLEncoder.encode(pair.getName(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
+        }
+
+        return result.toString();
+    }
+    
     private String post(String path, List<NameValuePair> nameValuePair) {
+        URL url = new URL(this.url + path);
+        HttpURLConnection http = (HttpURLConnection) url.openConnection();
+        http.setRequestMethod("POST");
+        http.setDoInput(true);
+        http.setDoOutput(true);
+        
+        # write data
+        OutputStream os = http.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(
+        new OutputStreamWriter(os, "UTF-8"));
+        writer.write(getQuery(nameValuePair));
+        writer.flush();
+        writer.close();
+        os.close();
+        
+        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+        readStream(in);
+        
+        String theString = IOUtils.toString(in, "UTF-8"); 
+        return theString;
+        
+        /*
         HttpPost httpPost = new HttpPost(this.url + path);
         
         try {
@@ -80,6 +122,7 @@ class GGWPAPI {
         }
 
         return null;
+        */
     }
     
     private String post_file(String path, InputStreamEntity reqEntity) {
