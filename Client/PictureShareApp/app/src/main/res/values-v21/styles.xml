@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/primaryColor</item>
+
+        <item name="android:colorAccent">@color/primaryColor</item>
+        <item name="android:colorControlActivated">@color/primaryTextColor</item>
+        <item name="android:colorControlHighlight">@color/primaryTextColor</item>
+        <item name="android:colorControlNormal">@color/primaryDarkColor</item>
+    </style>
+
+    <style name="WhiteEditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColorHint">@color/primaryDarkColor</item>
+
+    </style>
+
+    <style name="WhiteTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <style name="WhiteButtonStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+</resources>
