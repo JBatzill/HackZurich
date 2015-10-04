@@ -102,8 +102,6 @@ def register():
     email = request.form['email']
     password = request.form['password']
     
-    print "YO"
-    
     if User.query.filter_by(email = email).first() is not None:
         return "Error: User name already in use."
     else:
@@ -118,9 +116,7 @@ def register():
 def login():
     email = request.form['email']
     password = request.form['password']
-    
-    print email, password
-    
+        
     if User.query.filter_by(email = email).first() is None:
         return "Error: User not found"
     else:

@@ -45,8 +45,7 @@ public class GGWPAPI {
 
         return GGWPAPI.instance;
     }
-
-    private HttpClient httpClient;
+    
     public String session_key;
     private String url = "http://gg-wp.cloudapp.net:5000/api/";
 
@@ -56,50 +55,9 @@ public class GGWPAPI {
     public GGWPAPI(String session_key) {
         this.session_key = session_key;
     }
-    
-    /*
-    private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
 
-        for (NameValuePair pair : params) {
-            if (first) {
-                first = false;
-            }
-            else {
-                result.append("&");
-            }
-
-            result.append(URLEncoder.encode(pair.getName(), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
-        }
-
-        return result.toString();
-    }
-    */
 
     private String post(String path, List<NameValuePair> nameValuePair) {
-        /*
-        URL url = new URL(this.url + path);
-        HttpURLConnection http = (HttpURLConnection) url.openConnection();
-        http.setRequestMethod("POST");
-        http.setDoInput(true);
-        http.setDoOutput(true);
-        
-        // write data
-        OutputStream os = http.getOutputStream();
-        BufferedWriter writer = new BufferedWriter(
-        new OutputStreamWriter(os, "UTF-8"));
-        writer.write(getQuery(nameValuePair));
-        writer.flush();
-        writer.close();
-        os.close();
-        
-        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-        String theString = IOUtils.toString(in, "UTF-8"); 
-        return theString;
-        */
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(this.url + path);
 
@@ -124,12 +82,13 @@ public class GGWPAPI {
     }
 
     private String post_file(String path, InputStreamEntity reqEntity) {
+        HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(this.url + path);
 
         httpPost.setEntity(reqEntity);
 
         try {
-            HttpResponse response = this.httpClient.execute(httpPost);
+            HttpResponse response = httpClient.execute(httpPost);
             Log.d("Http Post Response:", response.toString());
             return response.toString();
         } catch (ClientProtocolException e) {
@@ -142,10 +101,11 @@ public class GGWPAPI {
     }
 
     private String get(String path) {
+        HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(this.url + path);
 
         try {
-            HttpResponse response = this.httpClient.execute(httpGet);
+            HttpResponse response = httpClient.execute(httpGet);
             Log.d("Http Post Response:", response.toString());
             return response.toString();
         } catch (ClientProtocolException e) {
@@ -158,10 +118,11 @@ public class GGWPAPI {
     }
 
     private Bitmap get_file(String path) {
+        HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(this.url + path);
 
         try {
-            HttpResponse response = this.httpClient.execute(httpGet);
+            HttpResponse response = httpClient.execute(httpGet);
 
             String entityContents="";
             HttpEntity responseEntity = response.getEntity();
