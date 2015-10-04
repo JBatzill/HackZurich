@@ -58,7 +58,7 @@ public class RegisterActivity extends Activity {
         }.execute();
     }
 
-    private void successfullRegistered(String email, String password) {
+    public void successfullRegistered(String email, String password) {
         LoginActivity.LOG_IN(this, email, password);
     }
 }

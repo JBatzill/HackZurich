@@ -7,6 +7,15 @@
         <item name="android:navigationBarColor">@color/navigationBarColor</item>
 
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
-        <item name="android:actionMenuTextColor">@color/textColorSecundary</item>
+        <item name="android:actionMenuTextColor">@color/textColorSecondary</item>
+    </style>
+
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/colorPrimary</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/textColorSecondary</item>
+        <!-- Used for the background -->
+        <item name="android:background">@color/windowBackground</item>
     </style>
 </resources>

@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/login_hint_firstname"
                 android:textColorLink="@color/colorPrimaryDark"
-                android:textColor="@color/textColorSecundary"/>
+                android:textColor="@color/textColorSecondary"/>
 
             <EditText
                 android:id="@+id/txt_register_lastname"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/login_hint_lastname"
                 android:textColorLink="@color/colorPrimaryDark"
-                android:textColor="@color/textColorSecundary"/>
+                android:textColor="@color/textColorSecondary"/>
 
             <EditText
                 android:id="@+id/txt_register_email"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/login_hint_email"
                 android:textColorLink="@color/colorPrimaryDark"
-                android:textColor="@color/textColorSecundary"/>
+                android:textColor="@color/textColorSecondary"/>
 
 
             <EditText
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/login_hint_password"
                 android:inputType="textPassword"
-                android:textColor="@color/textColorSecundary"/>
+                android:textColor="@color/textColorSecondary"/>
 
             <LinearLayout
                 android:layout_marginTop="32dp"
@@ -70,7 +70,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="32dp"
                     android:text="@string/login_create_account"
-                    android:background="@drawable/round_primary_button"
+                    android:background="@drawable/round_corners_primary_button"
                     android:onClick="btnRegistr_OnClick"
                     />
 

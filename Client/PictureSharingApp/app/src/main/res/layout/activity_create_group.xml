@@ -1,0 +1,128 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="0dp"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="0dp"
+    tools:context="hackzurich.picturesharingapp.CreateGroupActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+            <EditText
+                android:id="@+id/txt_sharing_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorSecondary"
+                android:hint="@string/sharing_name_hint"
+                android:layout_marginBottom="12pt"/>
+
+            <LinearLayout
+                android:id="@+id/ll_time"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/start_date"/>
+
+                        <TextView
+                            android:id="@+id/txt_date_start"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="24pt"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="btnDate_OnClick"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/end_date"/>
+
+                        <TextView
+                            android:id="@+id/txt_date_end"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="24pt"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="btnDate_OnClick"/>
+                    </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/txt_user"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="@color/textColorSecondary"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"/>
+
+                    <ImageButton style="@style/AppTheme"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_add_white_48dp"
+                        android:id="@+id/btn_AddUser"
+                        android:onClick="btnAddUser_OnClick"
+                        android:elevation="5dp"
+                        android:background="@drawable/round_action_button" />
+
+                </RelativeLayout>
+
+
+                <ListView
+                    android:id="@+id/lv_user"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"></ListView>
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageButton style="@style/AppTheme"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_done_white_48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="14dp"
+        android:layout_marginRight="14dp"
+        android:id="@+id/btn_CreateGroup"
+        android:elevation="10dp"
+        android:onClick="btnAdd_OnClick"
+        android:background="@drawable/round_action_button" />
+
+</RelativeLayout>

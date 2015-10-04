@@ -7,6 +7,8 @@
     <color name="navigationBarColor">#00897B</color>
 
     <color name="textColorPrimary">@android:color/white</color>
-    <color name="textColorSecundary">@android:color/black</color>
+    <color name="textColorSecondary">@android:color/black</color>
+
+    <color name="transparentBackground">#44000000</color>
 
 </resources>

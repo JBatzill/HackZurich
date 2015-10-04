@@ -1,9 +1,12 @@
 package hackzurich.picturesharingapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import hackzurich.picturesharingapp.adapter.ShareAdapter;
@@ -31,35 +34,33 @@ public class SharingsActivity extends Activity {
 
 
     private void loadActiveSharings() {
-        this.adapter.addItem(new SharingItemContainer("test1", BitmapHelper.LOAD_ROUND_CORNER_IMAGE(this.getResources(), 8, R.drawable.img1, 12), "42"));
-        this.adapter.addItem(new SharingItemContainer("test2", BitmapHelper.LOAD_ROUND_CORNER_IMAGE(this.getResources(), 8, R.drawable.img2, 12), "42"));
+        this.adapter.addItem(new SharingItemContainer("Nord Amerika", BitmapHelper.LOAD_ROUND_CORNER_IMAGE(this.getResources(), 4, R.drawable.img1, 12), "42"));
+        this.adapter.addItem(new SharingItemContainer("Sonnenuntergang", BitmapHelper.LOAD_ROUND_CORNER_IMAGE(this.getResources(), 4, R.drawable.img2, 12), "42"));
     }
 
 
     private void loadRecentSharings() {
-        this.adapter.addItem(new SharingItemContainer("Fraänzen du alter hund!", BitmapHelper.LOAD_ROUND_CORNER_IMAGE(this.getResources(), 8, R.drawable.img3, 12), "42"));
+        this.adapter.addItem(new SharingItemContainer("Fraänzen du alter hund!", BitmapHelper.LOAD_ROUND_CORNER_IMAGE(this.getResources(), 4, R.drawable.img3, 12), "42"));
+        this.adapter.addItem(new SharingItemContainer("Sharing is Caring!", BitmapHelper.LOAD_ROUND_CORNER_IMAGE(this.getResources(), 4, R.drawable.img1, 12), "42"));
+        this.adapter.addItem(new SharingItemContainer("Fraänzen du alter hund!", BitmapHelper.LOAD_ROUND_CORNER_IMAGE(this.getResources(), 4, R.drawable.img3, 12), "42"));
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sharings, menu);
-        return true;
-    }
+    public void btnPlay_OnClick(View v) {
+        ImageButton btn = (ImageButton)v;
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if(String.valueOf(btn.getTag()) == "0") {
+            btn.setTag(1);
+            btn.setImageResource(R.drawable.pause_icon);
+        } else {
+            btn.setTag(0);
+            btn.setImageResource(R.drawable.play_arrow);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    public void btnAdd_OnClick(View v) {
+        Intent intent = new Intent(this, CreateGroupActivity.class);
+        startActivity(intent);
     }
 }
+//281211

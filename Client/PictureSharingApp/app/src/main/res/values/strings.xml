@@ -14,5 +14,11 @@
     <string name="title_activity_sharings">Sharings</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_create_group">Create A Sharing</string>
+
+    <string name="sharing_name_hint">Name</string>
+    <string name="start_date">Start in (h)</string>
+    <string name="end_date">End in (h)</string>
+    <string name="time_title">Enter Time Difference in Hours</string>
 
 </resources>

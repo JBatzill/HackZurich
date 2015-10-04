@@ -26,6 +26,14 @@
             android:name=".SharingsActivity"
             android:label="@string/title_activity_sharings" >
         </activity>
+        <activity
+            android:name=".CreateGroupActivity"
+            android:label="@string/title_activity_create_group" >
+        </activity>
+
+        <service
+            android:name="background.RSSPullService"
+            android:exported="false"/>
     </application>
 
 </manifest>

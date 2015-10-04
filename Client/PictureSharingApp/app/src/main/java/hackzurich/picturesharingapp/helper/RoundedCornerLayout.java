@@ -16,7 +16,7 @@ import android.widget.FrameLayout;
 /**
  * Created by Johannes on 10/3/2015.
  */public class RoundedCornerLayout extends FrameLayout {
-    private final static float CORNER_RADIUS = 6.0f;
+    private final static float CORNER_RADIUS = 3.0f;
 
     private Bitmap maskBitmap;
     private Paint paint, maskPaint;

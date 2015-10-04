@@ -1,15 +1,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingBottom="0pt"
+    android:paddingTop="12dp"
     tools:context="hackzurich.picturesharingapp.SharingsActivity"
-    android:background="@color/windowBackground2">
+    android:background="@color/windowBackground">
 
 <ListView
     android:id="@+id/lv_sharings"
     android:divider="@null"
-    android:dividerHeight="0pt"
+    android:dividerHeight="0dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"></ListView>
+    android:layout_height="match_parent"
+    ></ListView>
 
+    <ImageButton style="@style/AppTheme"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/ic_add_white_48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="14dp"
+        android:layout_marginRight="14dp"
+        android:id="@+id/btn_Add"
+        android:elevation="10dp"
+        android:onClick="btnAdd_OnClick"
+        android:background="@drawable/round_action_button" />
 </RelativeLayout>
